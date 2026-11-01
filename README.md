@@ -8,6 +8,24 @@ Built by [Kaella Studio](https://kaellastudio.com). Every workflow here is
 importable, commented, and runs on synthetic data. **No client data, no
 client names, no real credentials.**
 
+> **Portfolio build.** This was built to show the approach, not run on a live
+> store. There was no store or social pages of my own to point it at, so it was
+> tested on a real n8n instance with Shopify, Google, OpenAI, Slack and
+> GoHighLevel replaced by local stand-ins (details under [Status](#status)).
+> To use it for real, replace the placeholders below and connect your own
+> accounts, then do one test run before switching anything on:
+>
+> | Placeholder | Where | Replace with |
+> |---|---|---|
+> | `CONFIG` block | *Settings and clean input*, each workflow | Brand name, support email, delivery and reply times |
+> | `SHEET_ID_HERE` | Every Google Sheets node | Your Google Sheet ID |
+> | `YOUR-STORE` | *Look up order (Shopify)* | Your `.myshopify.com` subdomain |
+> | `#support` | *Notify team* | Your Slack channel |
+> | `https://example.com` | *Chat message* webhook, Allowed Origins | Your store's domain |
+> | `CHANGE-ME` | `webhookSecret` in the GHL bridge | A long random string, also set in GHL |
+> | `example.test` links | `sample-data/faq.csv` | Your real shipping, returns and warranty pages |
+> | Credentials | Every node that needs one | Your own. None are included |
+
 ---
 
 ## The problem it solves
