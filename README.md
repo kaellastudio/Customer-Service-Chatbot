@@ -165,16 +165,22 @@ currently supported version when you install.
 
 ## Status
 
-All three workflows are structurally validated: every file parses, every
-connection resolves to a real node, no workflow has two nodes sharing a name,
-and node parameters have been checked against the n8n node source
-(n8n-nodes-base 2.15.1). The Code nodes and routing have been run against
-every case in `sample-data/` in a simulator, including a model outage and a
-rejected Shopify token, with the external services mocked. The widget has
-been tested in a headless browser at phone width.
+All three workflows have been run end to end on a live n8n instance (n8n
+2.45.7): imported, published, and triggered through their real webhook and
+Gmail trigger. Google Sheets, Gmail, Slack, OpenAI, Shopify and GoHighLevel
+were replaced by a local stand-in server, so every n8n node ran for real but
+no real account was touched. Every case in `sample-data/` was run, plus a
+model outage, a model returning junk, and a rejected Shopify token. The
+widget has been tested in a headless browser at phone width.
 
-They have **not yet been run end to end on a live n8n instance.** That pass is
-next, and this paragraph gets deleted when it is done.
+That pass found and fixed two problems: Google Sheets writes need a column
+schema when imported rather than built in the editor, and the team alert
+had lost the customer's message because it ran after the Sheets node.
+
+What has not been tested is the real services themselves: actual Shopify,
+Google, OpenAI and GHL accounts. GHL's webhook body in particular can vary
+by account, so check the first real execution (see the
+[GHL guide](ghl/README.md#check-on-the-first-real-run)).
 
 ## Licence
 
