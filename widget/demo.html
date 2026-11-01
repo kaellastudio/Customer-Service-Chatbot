@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support chat demo</title>
+<style>
+  body { margin: 0; font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: #f4f1ec; color: #222; }
+  main { max-width: 720px; margin: 0 auto; padding: 48px 16px 160px; }
+  h1 { font-size: 28px; margin: 0 0 8px; }
+  .note { background: #fff; border: 1px solid #e3ddd3; border-radius: 12px; padding: 16px 18px; }
+  code { background: #ece7de; padding: 1px 5px; border-radius: 4px; font-size: 14px; }
+  li { margin: 4px 0; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Example Co</h1>
+  <p>A stand-in store page. Open the chat in the bottom right.</p>
+  <div class="note">
+    <p><strong>Demo mode.</strong> Replies on this page are canned, so it works offline with no n8n behind it.
+       In a real install the widget calls the <em>Website support chat</em> workflow instead.</p>
+    <p>Try:</p>
+    <ul>
+      <li><code>do you ship to germany?</code> answered from the FAQ</li>
+      <li><code>where is my order?</code> asks for the order number and email</li>
+      <li><code>#1001</code> then <code>sam.sample@example.test</code> looks the order up</li>
+      <li><code>I need to change my address</code> handed to a person, never changed by the bot</li>
+    </ul>
+  </div>
+</main>
+
+<script>
+  // Demo only: answer the widget's requests locally, using the same wording
+  // the workflow uses. Delete this block in a real install.
+  (function () {
+    var DEMO = 'https://demo.invalid/webhook/support-chat';
+    var realFetch = window.fetch.bind(window);
+    window.fetch = function (url, init) {
+      if (url !== DEMO) return realFetch(url, init);
+      var b = JSON.parse(init.body);
+      var all = b.history.filter(function (t) { return t.role === 'user'; }).map(function (t) { return t.text; }).concat(b.message).join('\n');
+      var m = b.message.toLowerCase();
+      var email = (all.match(/[^\s@]+@[^\s@]+\.[a-z]{2,}/gi) || []).pop();
+      var order = (all.match(/#\s?(\d{3,10})/) || [])[1];
+      var asked = /order|track|shipped/.test(all.toLowerCase());
+      var reply;
+      if (/address/.test(m) || (/address/.test(all.toLowerCase()) && email)) {
+        reply = email
+          ? "I can't change an address myself, but I've sent your request to the team, and they'll email you at " + email + " within one working day. If the order has already shipped, they'll tell you what's still possible."
+          : "I'll pass this to the team. What's the best email address to reach you on?";
+      } else if (/ship to|deliver to|how long/.test(m)) {
+        reply = "Yes, we ship to the EU, including Germany. Orders leave us within 1 to 2 working days, then EU delivery takes 4 to 7 working days. https://example.test/pages/shipping";
+      } else if (/return|refund/.test(m)) {
+        reply = "You can return unused items within 30 days of delivery for a refund. Start a return from the link in your shipping email. https://example.test/pages/returns";
+      } else if (asked || order) {
+        if (!order || !email) {
+          var missing = [];
+          if (!order) missing.push('your order number (it is in your confirmation email, for example #1234)');
+          if (!email) missing.push('the email address you ordered with');
+          reply = 'Happy to check. Could you send me ' + missing.join(' and ') + '?';
+        } else if (order === '1001' && email.toLowerCase() === 'sam.sample@example.test') {
+          reply = 'Order #1001 shipped on 28 October with Royal Mail. You can track it here: https://tracking.example.test/RM123456789GB';
+        } else {
+          reply = "I couldn't find an order matching #" + order + ' and ' + email + '. Could you double-check both? The order number is in your confirmation email.';
+        }
+      } else {
+        reply = "I'll pass this to the team. What's the best email address to reach you on?";
+      }
+      return new Promise(function (resolve) {
+        setTimeout(function () {
+          resolve(new Response(JSON.stringify({ reply: reply, handoff: false }), { headers: { 'Content-Type': 'application/json' } }));
+        }, 600);
+      });
+    };
+  })();
+</script>
+<script src="support-chat.js"
+        data-endpoint="https://demo.invalid/webhook/support-chat"
+        data-brand="Example Co"
+        data-color="#1f3a5f"
+        data-greeting="Hi! Ask me about delivery, returns or your order."
+        defer></script>
+</body>
+</html>

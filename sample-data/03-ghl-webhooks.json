@@ -1,0 +1,71 @@
+{
+  "_comment": "Synthetic GoHighLevel 'Customer replied' webhook bodies, with the Custom Data the setup guide tells you to add. Pin one onto 'GHL customer replied' (as { headers, body }). Set webhookSecret in Settings and clean input to sample-secret to run them.",
+  "_cases": [
+    {
+      "case": "Instagram DM, FAQ: reply goes back on IG",
+      "body": {
+        "contact_id": "ct_sample_01",
+        "first_name": "Riley",
+        "email": "riley.sample@example.test",
+        "customData": {
+          "contactId": "ct_sample_01",
+          "message": "how much is shipping to the uk?",
+          "replyType": "IG",
+          "secret": "sample-secret"
+        }
+      }
+    },
+    {
+      "case": "SMS order check. The contact's email in GHL is the verification",
+      "body": {
+        "contact_id": "ct_sample_02",
+        "first_name": "Sam",
+        "email": "sam.sample@example.test",
+        "customData": {
+          "contactId": "ct_sample_02",
+          "message": "has #1001 shipped yet",
+          "replyType": "SMS",
+          "email": "sam.sample@example.test",
+          "secret": "sample-secret"
+        }
+      }
+    },
+    {
+      "case": "Wants a person, contact has no email: tagged for the team, who reply inside GHL",
+      "body": {
+        "contact_id": "ct_sample_03",
+        "first_name": "Jo",
+        "customData": {
+          "contactId": "ct_sample_03",
+          "message": "can I speak to someone please",
+          "replyType": "FB",
+          "secret": "sample-secret"
+        }
+      }
+    },
+    {
+      "case": "Missing message: stops in the first Code node. No model call, no reply",
+      "body": {
+        "contact_id": "ct_sample_04",
+        "customData": {
+          "contactId": "ct_sample_04",
+          "replyType": "SMS",
+          "secret": "sample-secret"
+        }
+      }
+    },
+    {
+      "case": "Wrong secret: stops in the first Code node, however real the rest looks",
+      "body": {
+        "contact_id": "ct_sample_05",
+        "customData": {
+          "contactId": "ct_sample_05",
+          "message": "where is my order #1001",
+          "replyType": "SMS",
+          "email": "sam.sample@example.test",
+          "secret": "guess"
+        }
+      }
+    }
+  ]
+}

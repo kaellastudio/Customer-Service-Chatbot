@@ -1,0 +1,29 @@
+{
+  "_comment": "Synthetic Shopify Admin API responses for GET /orders.json?name=<n>&status=any. Pin one onto 'Look up order (Shopify)' to test without a store. Every email uses the reserved .test domain.",
+  "1001": {
+    "_case": "shipped, with tracking. Matches only when the email is sam.sample@example.test",
+    "orders": [{
+      "name": "#1001", "email": "sam.sample@example.test", "contact_email": "sam.sample@example.test",
+      "cancelled_at": null, "fulfillment_status": "fulfilled",
+      "fulfillments": [{ "status": "success", "created_at": "2026-10-28T09:12:00Z", "tracking_company": "Royal Mail",
+        "tracking_urls": ["https://tracking.example.test/RM123456789GB"] }]
+    }]
+  },
+  "1002": {
+    "_case": "not shipped yet",
+    "orders": [{ "name": "#1002", "email": "alex.test@example.test", "cancelled_at": null, "fulfillment_status": null, "fulfillments": [] }]
+  },
+  "1003": {
+    "_case": "partly shipped, no tracking URL on the fulfilment",
+    "orders": [{ "name": "#1003", "email": "jo.example@example.test", "cancelled_at": null, "fulfillment_status": "partial",
+      "fulfillments": [{ "status": "success", "created_at": "2026-10-30T15:40:00Z", "tracking_company": "DHL", "tracking_urls": [] }] }]
+  },
+  "1004": {
+    "_case": "cancelled",
+    "orders": [{ "name": "#1004", "email": "pat.sample@example.test", "cancelled_at": "2026-10-25T11:00:00Z", "fulfillment_status": null, "fulfillments": [] }]
+  },
+  "_unauthorised": {
+    "_case": "what Shopify returns with a bad token. Must route to a person, not to 'order not found'",
+    "errors": "[API] Invalid API key or access token (unrecognized login or wrong password)"
+  }
+}
