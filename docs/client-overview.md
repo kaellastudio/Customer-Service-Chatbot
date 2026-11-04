@@ -23,24 +23,23 @@ attached, so nobody has to ask the customer to repeat themselves.
 | What's your returns policy? Which payments do you take? | Answered instantly from your FAQ |
 | Where is my order? | Asks for the order number and email, checks your store, replies with the status and tracking link |
 | My order arrived damaged | Apologises, tells them when your team will reply, and alerts your team |
-| Can I change my delivery address? | **Never changes it itself.** Collects the request and passes it to your team to confirm |
+| Can I change my delivery address? | Never changes it itself. It collects the request and passes it to your team to confirm |
 | Anything your FAQ doesn't cover | Passed to your team. It does not guess |
-| Emails | Writes a draft reply in your inbox. **You read it and press send** |
+| Emails | Writes a draft reply in your inbox. You read it and press send |
 
-## Why it is safe to put in front of customers
+## Why it's safe to put in front of customers
 
-- **It only says what your FAQ says.** You keep the FAQ in a simple
-  spreadsheet and can change any answer yourself. It never makes up a policy.
-- **It cannot promise anything you would not.** Refunds, delivery dates and
-  exceptions are always your team's call. The wording it uses when handing
-  over is fixed, so it cannot over-promise.
-- **Order details stay private.** It only shares an order's status when the
+- It only says what your FAQ says. You keep the FAQ in a simple spreadsheet
+  and can change any answer yourself, so it never makes up a policy.
+- It can't promise anything you wouldn't. Refunds, delivery dates and
+  exceptions are always your team's call, and the wording it uses when it
+  hands over is fixed.
+- Order details stay private. It only shares an order's status when the
   order number and email both match, and it never sees addresses or payment
   details.
-- **If something breaks, the customer reaches a person.** A technical fault
-  sends the customer to your team, never into silence.
-- **Nothing is sent from your email without you.** Email replies are drafts
-  until a person sends them.
+- If something breaks, the customer reaches a person, not silence.
+- Nothing goes out from your email without you. Email replies stay as drafts
+  until someone on your team sends them.
 
 ## How we roll it out
 
@@ -51,9 +50,9 @@ attached, so nobody has to ask the customer to repeat themselves.
 | 3 | Website chat goes live. We review every conversation daily and fill FAQ gaps | A person named to pick up handovers |
 | 4 | Add email drafts, then social messages once chat is proven | Approval to connect email and socials |
 
-Starting with the website, rather than every channel at once, means it is
-live in weeks, on the channel where buyers are, and proven before it touches
-your inbox.
+Starting with the website rather than every channel at once means it's live
+in a few weeks, on the channel where your buyers are, and proven before it
+goes anywhere near your inbox.
 
 ## What you get
 
